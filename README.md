@@ -35,7 +35,7 @@ SmartKart is a feature-rich shopping application that provides users with a seam
 
 ```bash
 git clone https://github.com/mskp/e-commerce-react-firebase
-cd smartkart
+cd e-commerce-react-firebase
 ```
 
 ### **Install the dependencies:**
