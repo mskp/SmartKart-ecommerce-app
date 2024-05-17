@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { usdToInr } from "../../utils";
 
+/**
+ * Async thunk to fetch products from the fakestoreapi.com.
+ */
 export const fetchProducts = createAsyncThunk(
   "products/fetchBySearchTerm",
   async (_, { rejectWithValue }) => {
@@ -28,6 +31,9 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+/**
+ * Async thunk to fetch a product by its ID from the fakestoreapi.com.
+ */
 export const fetchProductById = createAsyncThunk(
   "products/fetchById",
   async (id, { rejectWithValue }) => {
@@ -45,45 +51,55 @@ export const fetchProductById = createAsyncThunk(
   }
 );
 
+/**
+ * Initial state for the products slice.
+ */
 const initialState = {
-  products: [],
-  isLoading: false,
-  error: null,
+  products: [], // Array to store products
+  productById: null, // Single product fetched by ID
+  isLoading: false, // Indicates whether products are being fetched
+  error: null, // Error message for fetching products
 };
 
+/**
+ * Create a Redux slice for managing products state.
+ */
 const productsSlice = createSlice({
-  name: "products",
-  initialState,
-  reducers: {},
+  name: "products", // Name of the slice
+  initialState, // Initial state defined above
+  reducers: {}, // No additional reducers
   extraReducers: (builder) => {
     builder
+      // Reducers for handling actions dispatched by async thunks
       .addCase(fetchProducts.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
+        state.isLoading = true; // Set isLoading to true when fetching products starts
+        state.error = null; // Clear any previous error message
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.products = action.payload;
+        state.isLoading = false; // Set isLoading to false when fetching products is successful
+        state.products = action.payload; // Set products array to the fetched products
       })
       .addCase(fetchProducts.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
+        state.isLoading = false; // Set isLoading to false when fetching products fails
+        state.error = action.payload; // Set error message
       })
       .addCase(fetchProductById.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
+        state.isLoading = true; // Set isLoading to true when fetching a product by ID starts
+        state.error = null; // Clear any previous error message
       })
       .addCase(fetchProductById.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.products = [action.payload]; // Single product
+        state.isLoading = false; // Set isLoading to false when fetching a product by ID is successful
+        state.productById = action.payload; // Set productById to the fetched product
       })
       .addCase(fetchProductById.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
+        state.isLoading = false; // Set isLoading to false when fetching a product by ID fails
+        state.error = action.payload; // Set error message
       });
   },
 });
 
+// Selector for accessing products state
 export const selectProducts = (state) => state.products;
 
+// Export reducer
 export const productsReducer = productsSlice.reducer;

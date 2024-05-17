@@ -1,5 +1,9 @@
 import Logo from "./logo";
 
+/**
+ * Footer component represents the footer section of the application.
+ * @returns {JSX.Element} The JSX element representing the footer.
+ */
 export default function Footer() {
   return (
     <footer className="w-full bg-white p-8 shadow-2xl">

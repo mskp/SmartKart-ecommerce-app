@@ -7,16 +7,33 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
+import LogoutConfirmationModal from "./components/confirm-logout-modal";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 import SearchResult from "./components/search-result";
 import ShoppingCart from "./components/shopping-cart";
-import LogoutConfirmationModal from "./components/confirm-logout-modal";
 
+/**
+ * Main application component.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ */
 function App() {
   const [searchParams] = useSearchParams();
 
+  /**
+   * Gets the search term from URL search parameters.
+   *
+   * @type {string|null}
+   */
   const searchTerm = searchParams.get("q");
+
+  /**
+   * Hook to navigate programmatically.
+   *
+   * @type {function}
+   */
   const navigate = useNavigate();
 
   return (
