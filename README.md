@@ -76,6 +76,8 @@ pnpm dev
 pnpm build
 ```
 
+> Important Note: There is an .env.example file in the repository with sample variables required to run this project. These include Firebase credentials. Create a .env file in the root of the project and set these variables with proper values.
+
 ## Collaborators:
 
 - **Sushant Pandey**
