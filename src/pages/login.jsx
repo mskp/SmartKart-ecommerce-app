@@ -7,29 +7,35 @@ import PasswordInput from "../components/password-input";
 import useAuth from "../hooks/use-auth";
 import { loginValidationSchema } from "../utils/validation-schemas";
 
+/**
+ * Login component renders the login form and handles user authentication.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Login component.
+ */
 export default function Login() {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const { login } = useAuth();
+  const [isLoading, setIsLoading] = useState(false); // Loading state for form submission
+  const [error, setError] = useState(""); // Error state for form submission
+  const { login } = useAuth(); // Custom hook for authentication
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "", // Initial value for email input
+      password: "", // Initial value for password input
     },
     onSubmit: async ({ email, password }) => {
       try {
         setIsLoading(true);
-        await login(email, password);
-        navigate("/");
+        await login(email, password); // Perform login
+        navigate("/"); // Redirect to home page on success
       } catch (error) {
-        toast.error("Invalid credentails", { id: "error-toast" });
+        toast.error("Invalid credentials", { id: "error-toast" }); // Show error toast on failure
       } finally {
         setIsLoading(false);
       }
     },
-    validationSchema: loginValidationSchema,
+    validationSchema: loginValidationSchema, // Validation schema for the form
   });
 
   return (

@@ -1,33 +1,35 @@
 import { Button } from "@nextui-org/react";
-import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import useCart from "../hooks/use-cart";
-import { usdToInr } from "../utils";
-import ErrorComponent from "./error-component";
-import LoadingComponent from "./loading-component";
-import { useSelector } from "react-redux";
+import useOrders from "../hooks/use-orders";
 import {
   fetchProductById,
   selectProducts,
 } from "../redux/slices/product-slice";
-import { useDispatch } from "react-redux";
-import useOrders from "../hooks/use-orders";
+import ErrorComponent from "./error-component";
+import LoadingComponent from "./loading-component";
 
+/**
+ * Product component represents a single product details page.
+ * @returns {JSX.Element} The JSX element representing the product page.
+ */
 function Product() {
-  const productId = useLoaderData();
+  const { productId } = useParams();
   const { addToCart } = useCart();
   const dispatch = useDispatch();
-  const { addNewOrder, orders } = useOrders();
+  const { addNewOrder } = useOrders();
 
   const {
     isLoading,
     error,
-    products: [product],
+    productById: product,
   } = useSelector(selectProducts);
 
   useEffect(() => {
     dispatch(fetchProductById(productId));
-  }, []);
+  }, [dispatch, productId]);
 
   if (isLoading) return <LoadingComponent />;
 

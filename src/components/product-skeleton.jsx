@@ -1,3 +1,7 @@
+/**
+ * ProductSkeleton component represents a skeleton placeholder for product items.
+ * @returns {JSX.Element} The JSX element representing the product skeleton.
+ */
 function ProductSkeleton() {
   return (
     <div className="bg-white">
@@ -23,4 +27,5 @@ function ProductSkeleton() {
     </div>
   );
 }
+
 export default ProductSkeleton;

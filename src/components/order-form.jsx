@@ -1,3 +1,7 @@
+/**
+ * OrderForm component represents a form for entering order details.
+ * @returns {JSX.Element} The JSX element representing the order form.
+ */
 function OrderForm() {
   return (
     <div className="flex items-center justify-center p-6 sm:p-12">

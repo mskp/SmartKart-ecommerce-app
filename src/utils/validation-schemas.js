@@ -1,5 +1,10 @@
 import * as Yup from "yup";
 
+/**
+ * Validation schema for user signup form.
+ *
+ * @type {Yup.ObjectSchema}
+ */
 export const signupValidationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
@@ -12,6 +17,11 @@ export const signupValidationSchema = Yup.object({
     .required("Please re-enter the password"),
 });
 
+/**
+ * Validation schema for user login form.
+ *
+ * @type {Yup.ObjectSchema}
+ */
 export const loginValidationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
