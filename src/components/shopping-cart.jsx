@@ -4,12 +4,16 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
+import { Button } from "@nextui-org/react";
 import { X } from "lucide-react";
 import { Fragment } from "react";
 import useCart from "../hooks/use-cart";
 import useOrders from "../hooks/use-orders";
-import { Button } from "@nextui-org/react";
 
+/**
+ * Component for displaying the shopping cart with options to checkout and clear cart
+ * @returns {JSX.Element} ShoppingCart component JSX
+ */
 export default function ShoppingCart() {
   const {
     cart,
@@ -22,6 +26,9 @@ export default function ShoppingCart() {
 
   const { addMultipleOrders } = useOrders();
 
+  /**
+   * Handles the checkout process by adding orders to the cart and clearing it
+   */
   function handleCheckout() {
     addMultipleOrders(cart);
     clearWholeCart();

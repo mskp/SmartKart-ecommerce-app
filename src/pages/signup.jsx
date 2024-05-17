@@ -9,6 +9,12 @@ import { auth } from "../config/firebase.config";
 import useAuth from "../hooks/use-auth";
 import { signupValidationSchema } from "../utils/validation-schemas";
 
+/**
+ * Signup component for user registration.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Signup component.
+ */
 export default function Signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -17,9 +23,7 @@ export default function Signup() {
 
   const formik = useFormik({
     initialValues: {
-      // fullName: "",
       email: "",
-      // phone: "",
       password: "",
       confirmPassword: "",
     },
@@ -59,16 +63,6 @@ export default function Signup() {
               </span>
             </div>
           )}
-          {/* <Input
-            label="Full Name"
-            variant="underlined"
-            color="primary"
-            value={formik.values.fullName}
-            onChange={formik.handleChange("fullName")}
-            errorMessage={formik.submitCount > 0 && formik.errors.fullName}
-            isInvalid={formik.submitCount > 0 && !!formik.errors.fullName}
-            placeholder="John Doe"
-          /> */}
           <Input
             label="Email"
             variant="underlined"
@@ -79,18 +73,6 @@ export default function Signup() {
             isInvalid={formik.submitCount > 0 && !!formik.errors.email}
             placeholder="johndoe@gmail.com"
           />
-          {/* <Input
-            label="Phone"
-            minLength={10}
-            maxLength={10}
-            variant="underlined"
-            color="primary"
-            value={formik.values.phone}
-            onChange={formik.handleChange("phone")}
-            errorMessage={formik.submitCount > 0 && formik.errors.phone}
-            isInvalid={formik.submitCount > 0 && !!formik.errors.phone}
-            placeholder="89******54"
-          /> */}
           <PasswordInput
             label={"Password"}
             value={formik.values.password}

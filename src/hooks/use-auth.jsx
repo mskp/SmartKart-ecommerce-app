@@ -5,18 +5,31 @@ import { auth as authentication } from "../config/firebase.config";
 import { selectAuth, setAuth } from "../redux/slices/auth-slice";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Custom hook for handling authentication.
+ *
+ * @returns {Object} Authentication related functions and state.
+ */
 const useAuth = () => {
   const [loading, setLoading] = useState(true);
   const auth = useSelector(selectAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  /**
+   * Logs in the user with email and password.
+   *
+   * @param {string} email - The user's email.
+   * @param {string} password - The user's password.
+   * @returns {Promise<void>} A promise that resolves when the login is complete.
+   */
   const login = async (email, password) => {
-    const user = await signInWithEmailAndPassword(
+    const userCredential = await signInWithEmailAndPassword(
       authentication,
       email,
       password
     );
+    const user = userCredential.user;
     dispatch(
       setAuth({
         isAuthenticated: true,
@@ -27,6 +40,21 @@ const useAuth = () => {
         },
       })
     );
+  };
+
+  /**
+   * Logs out the current user.
+   *
+   * @returns {Promise<void>} A promise that resolves when the logout is complete.
+   */
+  const logout = async () => {
+    try {
+      await signOut(authentication);
+      dispatch(setAuth({ isAuthenticated: false, user: null }));
+      navigate("/login");
+    } catch (error) {
+      console.log("Error logging out:", error);
+    }
   };
 
   useEffect(() => {
@@ -47,17 +75,7 @@ const useAuth = () => {
     });
 
     return unsubscribe;
-  }, []);
-
-  const logout = async () => {
-    try {
-      await signOut(authentication);
-      dispatch(setAuth({ isAuthenticated: false, user: null }));
-      navigate("/login");
-    } catch (error) {
-      console.log("error logging out:", error);
-    }
-  };
+  }, [dispatch]);
 
   return { auth, login, logout, loading };
 };

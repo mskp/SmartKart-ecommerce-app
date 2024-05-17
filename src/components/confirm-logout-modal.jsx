@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment } from "react";
 import {
   Dialog,
   DialogPanel,
@@ -9,6 +9,10 @@ import {
 import { useModal } from "../hooks/use-modal";
 import useAuth from "../hooks/use-auth";
 
+/**
+ * LogoutConfirmationModal component displays a dialog to confirm user logout.
+ * @returns {JSX.Element} The JSX element representing the logout confirmation modal.
+ */
 export default function LogoutConfirmationModal() {
   const { closeModal, isOpen } = useModal();
   const { logout } = useAuth();
@@ -46,9 +50,9 @@ export default function LogoutConfirmationModal() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
-                class="w-6 h-6"
+                className="w-6 h-6"
               >
                 <path
                   strokeLinecap="round"

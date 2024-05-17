@@ -1,13 +1,16 @@
-import { useSearchParams } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import useCart from "../hooks/use-cart";
 import { fetchProducts, selectProducts } from "../redux/slices/product-slice";
 import ErrorComponent from "./error-component";
 import ProductSkeleton from "./product-skeleton";
 
+/**
+ * Component to display search results based on the query parameter 'q'
+ * @returns {JSX.Element} SearchResult component JSX
+ */
 function SearchResult() {
   const [searchParams] = useSearchParams();
   const { addToCart } = useCart();
@@ -20,7 +23,7 @@ function SearchResult() {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, []);
+  }, [dispatch]);
 
   const handleAddToCart = (product) => {
     addToCart({ ...product, quantity: 1 });
@@ -29,7 +32,7 @@ function SearchResult() {
   if (isLoading)
     return (
       <div className="py-4">
-        <h1 class="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl text-center">
+        <h1 className="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl text-center">
           Search Results
         </h1>
         <ProductSkeleton />
@@ -44,10 +47,10 @@ function SearchResult() {
       />
     );
   }
-  
+
   return (
     <section className="mb-6">
-      <h1 class="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl text-center">
+      <h1 className="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl text-center">
         Search Results
       </h1>
       <div className="bg-white">

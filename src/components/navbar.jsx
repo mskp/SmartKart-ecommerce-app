@@ -10,6 +10,10 @@ import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { useModal } from "../hooks/use-modal";
 
+/**
+ * Navbar component represents the navigation bar of the application.
+ * @returns {JSX.Element} The JSX element representing the navigation bar.
+ */
 export default function Navbar() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { showCart, totalItems } = useCart();
@@ -20,6 +24,10 @@ export default function Navbar() {
   const [searchTerm, setSearchTerm] = useState(searchParams.get("q") || "");
   const { openModal } = useModal();
 
+  /**
+   * Handles changes in the search input.
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The change event object.
+   */
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
     setSearchParams({ q: e.target.value }); // Update search params

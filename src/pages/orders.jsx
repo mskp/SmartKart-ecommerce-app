@@ -3,6 +3,12 @@ import useOrders from "../hooks/use-orders";
 import LoadingComponent from "../components/loading-component";
 import ErrorComponent from "../components/error-component";
 
+/**
+ * Orders component fetches and displays the user's orders.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Orders component.
+ */
 function Orders() {
   const { fetchUserAllOrders, orders, fetchingOrders, errorFetching } =
     useOrders();
@@ -11,9 +17,10 @@ function Orders() {
     fetchUserAllOrders();
   }, []);
 
-  if (fetchingOrders) return <LoadingComponent />;
+  if (fetchingOrders) return <LoadingComponent />; // Show loading component while fetching orders
 
-  if (errorFetching) return <ErrorComponent errorTitle="No orders found" />;
+  if (errorFetching || orders?.length === 0)
+    return <ErrorComponent errorTitle="No orders found" />; // Show error component if there's an error fetching orders
 
   return (
     <section className="relative flex justify-center items-center">
@@ -25,7 +32,7 @@ function Orders() {
           {orders?.map((item, idx) => (
             <div
               key={idx}
-              className="flex flex-col lg:flex-row items-center p-6 border-b border-gray-200 gap-6 w-full "
+              className="flex flex-col lg:flex-row items-center p-6 border-b border-gray-200 gap-6 w-full"
             >
               <div className="img-box max-w-[140px]">
                 <img
@@ -34,7 +41,7 @@ function Orders() {
                   className="aspect-square w-full"
                 />
               </div>
-              <div className="flex flex-col lg:flex-row items-center w-full ">
+              <div className="flex flex-col lg:flex-row items-center w-full">
                 <div className="grid grid-cols-1 lg:grid-cols-2 w-full">
                   <div className="flex items-center">
                     <div>
@@ -46,11 +53,11 @@ function Orders() {
                         <span className="capitalize">{item.category}</span>
                       </p>
                       <div className="flex items-center gap-4">
-                        <p className="font-medium text-xl leading-7 text-black ">
+                        <p className="font-medium text-xl leading-7 text-black">
                           Qty:{" "}
                           <span className="text-gray-800">{item.quantity}</span>
                         </p>
-                        <p className="font-medium  leading-7 text-black text-xl">
+                        <p className="font-medium leading-7 text-black text-xl">
                           Price:{" "}
                           <span className="text-gray-800">{`₹ ${item.priceInINR}`}</span>
                         </p>
@@ -66,4 +73,5 @@ function Orders() {
     </section>
   );
 }
+
 export default Orders;

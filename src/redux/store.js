@@ -5,14 +5,18 @@ import { modalReducer } from "./slices/modal-slice";
 import { ordersReducer } from "./slices/orders-slice";
 import { productsReducer } from "./slices/product-slice";
 
+/**
+ * Configures the Redux store with slices for authentication, cart, orders, products, and modal.
+ *
+ * @returns {object} The configured Redux store.
+ */
 const store = configureStore({
   reducer: {
-    auth: authReducer,
-    cart: cartReducer,
-    orders: ordersReducer,
-    products: productsReducer,
-    orders: ordersReducer,
-    modal: modalReducer,
+    auth: authReducer, // Reducer for authentication state
+    cart: cartReducer, // Reducer for cart state
+    orders: ordersReducer, // Reducer for orders state
+    products: productsReducer, // Reducer for products state
+    modal: modalReducer, // Reducer for modal state
   },
 });
 
