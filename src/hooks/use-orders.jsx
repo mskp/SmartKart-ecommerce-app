@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { hideOrderForm, showOrderForm } from "../redux/slices/order-form-slice";
 import {
   addMultipleOrdersToFirestore,
   addOrderToFirestore,
@@ -78,7 +79,30 @@ const useOrders = () => {
     }
   };
 
+  const isOrderFormOpen = useSelector((state) => state.orderForm.isOpen);
+
+  /**
+   * Opens the order form by dispatching the showOrderForm action.
+   */
+  const openOrderForm = () => {
+    if (!isAuthenticated) {
+      toast.error("You must login first", { id: "error-toast" });
+      return navigate("/login");
+    }
+    dispatch(showOrderForm());
+  };
+
+  /**
+   * Closes the order form by dispatching the hideOrderForm action.
+   */
+  const closeOrderForm = () => {
+    dispatch(hideOrderForm());
+  };
+
   return {
+    isOrderFormOpen,
+    openOrderForm,
+    closeOrderForm,
     orders,
     fetchingOrders,
     addingOrder,

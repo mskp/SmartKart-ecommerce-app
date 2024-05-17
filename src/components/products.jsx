@@ -53,7 +53,7 @@ export default function Products() {
         {/* Tabs for different product categories */}
         <div className="flex justify-center lg:overflow-hidden overflow-x-auto">
           <Tabs
-            size={window.innerWidth <= 700 ? "sm" : "lg"}
+            // size={window.innerWidth <= 700 ? "sm" : "lg"}
             aria-label="Options"
             color="primary"
             variant="underlined"
@@ -64,7 +64,7 @@ export default function Products() {
               tab: "max-w-fit px-0 h-12",
               tabContent: "group-data-[selected=true]:text-[#1865c4]",
             }}
-            className="font-bold lg:p-0 md:p-0 pl-96 pr-10 xs:p-[26rem]"
+            className="font-bold lg:p-0 md:p-0 pl-80 pr-10 xs:p-[26rem]"
             defaultSelectedKey={selectedTab}
             onSelectionChange={(key) => setSelectedTab(key)}
           >

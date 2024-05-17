@@ -10,6 +10,7 @@ import {
 import LogoutConfirmationModal from "./components/confirm-logout-modal";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
+import OrderForm from "./components/order-form";
 import SearchResult from "./components/search-result";
 import ShoppingCart from "./components/shopping-cart";
 
@@ -47,6 +48,7 @@ function App() {
       <Footer />
       <ScrollRestoration />
       <Toaster />
+      <OrderForm />
       <LogoutConfirmationModal />
     </NextUIProvider>
   );

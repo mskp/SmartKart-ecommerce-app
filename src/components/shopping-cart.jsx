@@ -24,14 +24,14 @@ export default function ShoppingCart() {
     clearWholeCart,
   } = useCart();
 
-  const { addMultipleOrders } = useOrders();
+  const { openOrderForm } = useOrders();
 
   /**
    * Handles the checkout process by adding orders to the cart and clearing it
    */
   function handleCheckout() {
-    addMultipleOrders(cart);
-    clearWholeCart();
+    openOrderForm();
+    hideCart();
   }
 
   return (

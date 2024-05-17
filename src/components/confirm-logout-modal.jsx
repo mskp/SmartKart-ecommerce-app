@@ -20,7 +20,7 @@ export default function LogoutConfirmationModal() {
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog
-        className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-[500000] justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] min-h-full bg-zinc-900 bg-opacity-70"
+        className="fixed inset-0 z-[500000] flex items-center justify-center bg-zinc-900 bg-opacity-70 px-6"
         onClose={() => closeModal()}
       >
         <TransitionChild
@@ -44,7 +44,7 @@ export default function LogoutConfirmationModal() {
           leaveFrom="opacity-100 translate-y-0 sm:scale-100"
           leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         >
-          <DialogPanel className="bg-white rounded-lg p-6 max-w-md mx-auto mt-24">
+          <DialogPanel className="bg-white rounded-lg p-6 w-full max-w-lg mx-auto">
             <div className="flex items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

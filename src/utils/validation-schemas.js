@@ -28,3 +28,16 @@ export const loginValidationSchema = Yup.object({
     .required("Email is required"),
   password: Yup.string().required("Password is required"),
 });
+
+/**
+ * Validation schema for order form.
+ *
+ * @type {Yup.ObjectSchema}
+ */
+export const orderFormValidationSchema = Yup.object({
+  name: Yup.string().required("Full Name is required"),
+  phone: Yup.string().required("Phone Number is required"),
+  address: Yup.string().required("Address is required"),
+  city: Yup.string().required("City is required"),
+  postcode: Yup.string().required("Postcode is required"),
+});

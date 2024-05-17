@@ -19,7 +19,7 @@ function Product() {
   const { productId } = useParams();
   const { addToCart } = useCart();
   const dispatch = useDispatch();
-  const { addNewOrder } = useOrders();
+  const { openOrderForm } = useOrders();
 
   const {
     isLoading,
@@ -30,6 +30,11 @@ function Product() {
   useEffect(() => {
     dispatch(fetchProductById(productId));
   }, [dispatch, productId]);
+
+  const handleOrderProduct = async (product) => {
+    addToCart(product);
+    openOrderForm();
+  };
 
   if (isLoading) return <LoadingComponent />;
 
@@ -78,7 +83,7 @@ function Product() {
             Add to Cart
           </Button>
           <Button
-            onClick={async () => await addNewOrder({ ...product, quantity: 1 })}
+            onClick={() => handleOrderProduct({ ...product, quantity: 1 })}
             variant="solid"
             color="secondary"
             size="lg"
