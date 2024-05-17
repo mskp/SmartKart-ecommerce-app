@@ -29,6 +29,26 @@ SmartKart is a feature-rich shopping application that provides users with a seam
 
 - **Firebase:** A platform for building web and mobile applications without server-side programming.
 
+## Features:
+
+- **Authentication:**
+  Secure and seamless user authentication using Firebase, ensuring user data privacy and security.
+
+- **Cart Management:**
+  Efficient cart management system allowing users to add, remove, and update products in their cart effortlessly.
+
+- **Products Showcase:**
+  Attractive and organized display of a wide range of products with detailed descriptions and images.
+
+- **Category-wise Filtering:**
+  Advanced filtering options to help users easily find products based on categories, enhancing the shopping experience.
+
+- **Order Storage in Database:**
+  Robust order management system that stores individual user orders in the Firebase database for easy retrieval and tracking.
+
+- **Responsive UI:**
+  A highly responsive user interface built with Material-UI, Next-UI, and Tailwind CSS, ensuring a smooth shopping experience across all devices.
+
 ## How to Run:
 
 ### **Clone the repository:**
