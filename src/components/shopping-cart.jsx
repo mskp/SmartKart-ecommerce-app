@@ -5,10 +5,11 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { Button } from "@nextui-org/react";
-import { X } from "lucide-react";
+import { X, Plus, Minus } from "lucide-react";
 import { Fragment } from "react";
 import useCart from "../hooks/use-cart";
 import useOrders from "../hooks/use-orders";
+import { DialogTitle } from "@mui/material";
 
 /**
  * Component for displaying the shopping cart with options to checkout and clear cart
@@ -22,6 +23,7 @@ export default function ShoppingCart() {
     removeFromCart,
     totalPrice,
     clearWholeCart,
+    updateCartItemQuantity,
   } = useCart();
 
   const { openOrderForm } = useOrders();
@@ -32,6 +34,28 @@ export default function ShoppingCart() {
   function handleCheckout() {
     openOrderForm();
     hideCart();
+  }
+
+  /**
+   * Increases the quantity of a cart item
+   * @param {string} itemId - The ID of the item to increase the quantity of
+   * @param {number} currentQuantity - The current quantity of the item
+   */
+  function increaseQuantity(itemId, currentQuantity) {
+    if (currentQuantity < 5) {
+      updateCartItemQuantity(itemId, currentQuantity + 1);
+    }
+  }
+
+  /**
+   * Decreases the quantity of a cart item
+   * @param {string} itemId - The ID of the item to decrease the quantity of
+   * @param {number} currentQuantity - The current quantity of the item
+   */
+  function decreaseQuantity(itemId, currentQuantity) {
+    currentQuantity > 1
+      ? updateCartItemQuantity(itemId, currentQuantity - 1)
+      : removeFromCart(itemId);
   }
 
   return (
@@ -65,9 +89,9 @@ export default function ShoppingCart() {
                   <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900">
+                        <DialogTitle className="text-lg font-medium text-gray-900">
                           Shopping cart
-                        </Dialog.Title>
+                        </DialogTitle>
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
@@ -115,10 +139,35 @@ export default function ShoppingCart() {
                                       </p>
                                     </div>
                                     <div className="flex flex-1 items-end justify-between text-sm">
-                                      <p className="text-gray-500">
-                                        Qty {product.quantity}
-                                      </p>
-
+                                      <div className="flex items-center">
+                                        <button
+                                          type="button"
+                                          className="flex items-center justify-center w-8 h-8 border rounded-full text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-white"
+                                          onClick={() =>
+                                            decreaseQuantity(
+                                              product.id,
+                                              product.quantity
+                                            )
+                                          }
+                                        >
+                                          <Minus className="w-5 h-5" />
+                                        </button>
+                                        <p className="mx-4 text-gray-500">
+                                          Qty {product.quantity}
+                                        </p>
+                                        <button
+                                          type="button"
+                                          className="flex items-center justify-center w-8 h-8 border rounded-full text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-white"
+                                          onClick={() =>
+                                            increaseQuantity(
+                                              product.id,
+                                              product.quantity
+                                            )
+                                          }
+                                        >
+                                          <Plus className="w-5 h-5" />
+                                        </button>
+                                      </div>
                                       <div className="flex">
                                         <button
                                           type="button"
